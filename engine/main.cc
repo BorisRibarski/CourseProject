@@ -2,40 +2,41 @@
 #include <unistd.h>
 #include <fmt/core.h>
 
-#include "fs/wfile.hh"
-#include "fs/rfile.hh"
+// #include "fs/wfile.hh"
+// #include "fs/rfile.hh"
 
-#include "timing/team_calc.hh"
+#include "score/team.hh"
 
 #include <filesystem>
 
 namespace stdfs = std::filesystem;
 
-void fs_fun()
-{
-    stdfs::path path = "example.txt";
+#include <chrono>
 
-    fs::wfile wf(path);
-    std::string data = "This is a test string.";
-    wf.write(data.c_str(), data.size());
+// void fs_fun()
+// {
+//     stdfs::path path = "example.txt";
 
-    fs::rfile rf(path);
-    char buffer[256] = {0};
-    rf.read(buffer, sizeof(buffer) - 1);
+//     fs::wfile wf(path);
+//     std::string data = "This is a test string.";
+//     wf.write(data.c_str(), data.size());
 
-    fmt::println("Read from file: \n\t[ {} ]", buffer);
-}
+//     fs::rfile rf(path);
+//     char buffer[256] = {0};
+//     rf.read(buffer, sizeof(buffer) - 1);
+
+//     fmt::println("Read from file: \n\t[ {} ]", buffer);
+// }
 
 int main()
 {
-    if (0)
-    {
-        fs_fun();
-    }
+    score::team team;
+    team.set_time1(std::chrono::milliseconds(1200));
+    team.set_time2(std::chrono::milliseconds(1500));
+    team.set_time3(std::chrono::milliseconds(1100));
+    team.set_time4(std::chrono::milliseconds(1300));
 
-    timing::team_calc tc;
-    int total = tc.calc(std::chrono::seconds(120), std::chrono::seconds(150));
-    fmt::println("Total time in seconds: {}", total);
+    fmt::println("Total time in seconds: {}", team.get_time().count());
 
     return 0;
 }

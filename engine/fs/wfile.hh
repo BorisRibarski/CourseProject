@@ -1,7 +1,7 @@
 #pragma once
 
-#include "fs/file_handle.hh"
-#include "fs/writable.hh"
+#include "file_handle.hh"
+#include "writable.hh"
 #include <filesystem>
 
 namespace stdfs = std::filesystem;
