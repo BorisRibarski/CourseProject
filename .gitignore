@@ -2,4 +2,4 @@ test
 .vscode
 *.o
 engine/*.o
-engine/*/*.o
+engine/fs/*.o

@@ -6,7 +6,7 @@ SRC := $(wildcard ./*.cc ./*/*.cc)
 OBJ := $(SRC:.cc=.o)
 
 all: $(OBJ)
-	$(CXX) $^ $(LDFLAGS) -o program
+	$(CXX) $^ $(LDFLAGS) -o engine
 $.o : $.cc
 	$(CXX) -c $< $(CXXFLAGS)
 

@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <fmt/core.h>
 
-// #include "fs/wfile.hh"
-// #include "fs/rfile.hh"
+#include "fs/wfile.hh"
+#include "fs/rfile.hh"
 
 #include "score/team.hh"
 
@@ -13,20 +13,20 @@ namespace stdfs = std::filesystem;
 
 #include <chrono>
 
-// void fs_fun()
-// {
-//     stdfs::path path = "example.txt";
+void fs_fun()
+{
+    stdfs::path path = "example.txt";
 
-//     fs::wfile wf(path);
-//     std::string data = "This is a test string.";
-//     wf.write(data.c_str(), data.size());
+    fs::wfile wf(path);
+    std::string data = "This is a test string.";
+    wf.write(data.c_str(), data.size());
 
-//     fs::rfile rf(path);
-//     char buffer[256] = {0};
-//     rf.read(buffer, sizeof(buffer) - 1);
+    fs::rfile rf(path);
+    char buffer[256] = {0};
+    rf.read(buffer, sizeof(buffer) - 1);
 
-//     fmt::println("Read from file: \n\t[ {} ]", buffer);
-// }
+    fmt::println("Read from file: \n\t[ {} ]", buffer);
+}
 
 int main()
 {
