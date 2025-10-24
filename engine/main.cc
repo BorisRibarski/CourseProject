@@ -1,13 +1,9 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <fmt/core.h>
+#include "precompiled.hh"
 
 #include "fs/wfile.hh"
 #include "fs/rfile.hh"
 
 #include "score/team.hh"
-
-#include <filesystem>
 
 namespace stdfs = std::filesystem;
 
