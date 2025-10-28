@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++23 -Wall -Wextra -Werror -pedantic -H
+CXXFLAGS = -std=c++23 -Wall -Wextra -Werror -pedantic -I.
 LDFLAGS = -lfmt
 
 SRC := $(wildcard ./*.cc ./*/*.cc)
@@ -9,7 +9,7 @@ PDR := precompiled.hh.gch
 # HDR := $(wildcard ./*.hh ./*/*.hh)
 
 all: $(OBJ)
-	$(CXX) $^ $(LDFLAGS) -o engine
+	$(CXX) $^ $(LDFLAGS) -o engine 
 $.o : $.cc
 	$(CXX) -c $< $(CXXFLAGS)
 precompiled.hh.gch : precompiled.hh

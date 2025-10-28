@@ -2,7 +2,6 @@
 
 #include "file_handle.hh"
 #include "readable.hh"
-#include <filesystem>
 
 namespace stdfs = std::filesystem;
 

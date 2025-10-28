@@ -1,3 +1,5 @@
+#include "precompiled.hh"
+
 #include "team_calc.hh"
 
 namespace timing

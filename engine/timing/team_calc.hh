@@ -1,7 +1,5 @@
 #pragma once
 
-#include <chrono>
-
 namespace timing
 {
     class team_calc
