@@ -11,8 +11,9 @@
 
 #include "engine.hh"
 
+#include "com/owl.hh"
+
 int main()
 {
-    engine eng;
-    eng.load_files();
+    com::owl owl;
 }

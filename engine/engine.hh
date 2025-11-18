@@ -2,14 +2,16 @@
 
 #include "cyclist/cycler.hh"
 #include "fs/sysadmin.hh"
-class owl;
+#include "com/owl.hh"
 
 class engine
 {
-public:
+private:
     cyclist::cycler *cycler_;
     fs::sysadmin *sysadmin_;
-    owl *owl_;
+    com::owl *owl_;
+
+public:
     engine();
     ~engine();
     void load_files();
