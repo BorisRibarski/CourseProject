@@ -1,7 +1,7 @@
 #pragma once
 
 #include "file_handle.hh"
-#include "readable.hh"
+#include "interfaces/readable.hh"
 
 namespace stdfs = std::filesystem;
 
@@ -14,5 +14,6 @@ namespace fs
         rfile(const stdfs::path &path);
         ~rfile() noexcept;
         int read(void *buf, size_t count);
+        int read(std::string &buff);
     };
 }

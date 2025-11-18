@@ -6,14 +6,17 @@ namespace cyclist
 {
     class player
     {
-        team *team_;
         std::string name_;
+        int uci_id_;
 
     public:
         player() = delete;
-        player(std::string_view name);
-        std::string_view get_name() const;
-        void set_team(team *t);
-        team *get_team();
+        ~player();
+        player(std::string_view name, int uci_id);
+        player(std::string &buff);
+        std::string to_string();
+
+    private:
+        std::pair<std::string, int> divide(std::string &buff);
     };
 }

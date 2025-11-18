@@ -1,7 +1,7 @@
 #pragma once
 
 #include "file_handle.hh"
-#include "writable.hh"
+#include "interfaces/writable.hh"
 
 namespace stdfs = std::filesystem;
 
@@ -14,5 +14,6 @@ namespace fs
         wfile(const stdfs::path &path);
         ~wfile() noexcept;
         int write(const void *buf, size_t count);
+        int write(std::string buf);
     };
 }

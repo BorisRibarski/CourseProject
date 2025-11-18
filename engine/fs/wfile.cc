@@ -21,4 +21,8 @@ namespace fs
     {
         return ::write(this->fd, buf, count);
     }
+    int wfile::write(std::string buf)
+    {
+        return this->write(buf.c_str(), buf.size());
+    }
 }

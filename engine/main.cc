@@ -13,44 +13,35 @@
 
 void fs_fun()
 {
-    stdfs::path path = "example.txt";
-
+    stdfs::path path = "player.txt";
+    std::string data = "Bobi Mihaylov";
     fs::wfile wf(path);
-    std::string data = "This is a test string.";
     wf.write(data.c_str(), data.size());
 
     fs::rfile rf(path);
-    char buffer[256] = {0};
-    rf.read(buffer, sizeof(buffer) - 1);
+    std::string buffer = "";
+    rf.read(buffer);
 
     fmt::println("Read from file: \n\t[ {} ]", buffer);
 }
 
-void score_fun()
-{
-    score::team team;
-    team.set_time1(stdch::ms(1000));
-    team.set_time2(stdch::ms(2000));
-    team.set_time3(stdch::ms(1500));
-    team.set_time4(stdch::ms(2500));
-
-    fmt::println("Total time in milliseconds: {}", team.get_time().count());
-}
-
-void cyclist_fun()
-{
-    using namespace std::string_view_literals;
-    cyclist::player player("John Doe"sv);
-    fmt::println("{}", player.get_name());
-    cyclist::team t("Levski"sv);
-    fmt::println("Team name: {}", t.get_name());
-}
-
 int main()
 {
-    engine engine;
-    engine.run_dummy();
-    // load files and entities
-    // run communications
+    using namespace std::string_view_literals;
+
+    auto read_player = []()
+    {
+        cyclist::player data("Georgi Lumperov", 165418761);
+
+        stdfs::path path = "player.txt";
+        fs::wfile wf(path);
+        wf.write(data.to_string());
+
+        fs::rfile rf(path);
+        std::string buffer = "";
+        rf.read(buffer);
+        cyclist::player p(buffer);
+    };
+    read_player();
     return 0;
 }

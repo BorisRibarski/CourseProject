@@ -9,6 +9,7 @@
 #include <vector>
 
 #include <fmt/core.h>
+#include <fmt/format.h>
 
 namespace stdfs = std::filesystem;
 namespace stdch = std::chrono;
