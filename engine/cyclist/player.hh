@@ -7,16 +7,12 @@ namespace cyclist
     class player
     {
         std::string name_;
-        int uci_id_;
+        uint64_t uci_id_;
 
     public:
-        player() = delete;
+        player();
         ~player();
-        player(std::string_view name, int uci_id);
-        player(std::string &buff);
-        std::string to_string();
-
-    private:
-        std::pair<std::string, int> divide(std::string &buff);
+        player(std::string_view name, uint64_t uci_id);
+        std::string to_string() const;
     };
 }

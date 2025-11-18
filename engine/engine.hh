@@ -11,6 +11,7 @@ public:
     fs::sysadmin *sysadmin_;
     owl *owl_;
     engine();
+    ~engine();
     void load_files();
     void run_communications();
     void run_dummy();

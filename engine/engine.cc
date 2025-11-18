@@ -5,12 +5,20 @@
 engine::engine() : owl_(nullptr)
 {
     sysadmin_ = new fs::sysadmin();
-    cycler_ = new cyclist::cycler(sysadmin_);
+    cycler_ = new cyclist::cycler();
+}
+
+engine::~engine()
+{
+    delete cycler_;
+    delete sysadmin_;
 }
 
 void engine::load_files()
 {
     // Implementation for loading files goes here
+
+    cycler_->load(sysadmin_);
 }
 
 void engine::run_communications()

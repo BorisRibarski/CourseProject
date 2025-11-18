@@ -15,7 +15,13 @@ namespace cyclist
         std::vector<cyclist::team> teams_;
 
     public:
-        cycler(fs::sysadmin *sysadmin);
+        cycler();
         void run_dummy();
+        void load(fs::sysadmin *sysadmin);
+
+    private:
+        void load_players(fs::sysadmin *sysadmin);
+        void load_teams(fs::sysadmin *sysadmin);
+        std::pair<std::string, uint64_t> divide(std::string &buff);
     };
 }

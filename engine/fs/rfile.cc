@@ -21,11 +21,4 @@ namespace fs
     {
         return ::read(this->fd, buf, count);
     }
-    int rfile::read(std::string &buff)
-    {
-        char buffer[256] = {};
-        int res = this->read(buffer, 256);
-        buff = buffer;
-        return res;
-    }
 }

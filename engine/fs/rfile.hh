@@ -13,7 +13,11 @@ namespace fs
         rfile() = delete;
         rfile(const stdfs::path &path);
         ~rfile() noexcept;
+        template <size_t N>
+        int read(std::array<char, N> &buf)
+        {
+            return this->read(buf.data(), N);
+        }
         int read(void *buf, size_t count);
-        int read(std::string &buff);
     };
 }
