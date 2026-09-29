@@ -1,22 +1,16 @@
 #pragma once
 
 #include <fstream>
-
-/* example
-int main() {
-  ofstream myfile;
-  myfile.open ("example.txt");
-  myfile << "Writing this to a file.\n";
-  myfile.close();
-  return 0;
-}
-*/
+#include <string>
 
 namespace fio {
 
 class handler {
   protected:
     std::ofstream myfile;
+    std::string filename;
+    handler(std::string filename_) : filename(filename_) {
+    }
 };
 
 } // namespace fio

@@ -5,16 +5,6 @@
 
 #include "handler.hh"
 
-/* example
-int main() {
-  ofstream myfile;
-  myfile.open ("example.txt");
-  myfile << "Writing this to a file.\n";
-  myfile.close();
-  return 0;
-}
-*/
-
 namespace fio {
 
 class reader : handler {
