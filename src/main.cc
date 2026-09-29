@@ -5,7 +5,12 @@
 #include <string>
 #include <string_view>
 
+#include <vector>
+
 #include "application.hh"
+#include "fio/reader.hh"
+#include "fio/writer.hh"
+#include "lib/data_carrier.hh"
 
 struct flags {
     bool is_verbose;
@@ -20,7 +25,8 @@ flags handle_args(int argc, char **argv) {
     auto arg = args.begin() + 1;
 
     for (args_type::size_type i = 1; i < args.size(); i++, arg++) {
-        using namespace std::literals; // for "text"sv
+
+        using std::operator""sv;
 
         auto handle_mono = [](std::string_view str) {
             printf("%s\n", str.data());
@@ -78,5 +84,23 @@ int main(int argc, char **argv) {
     }
     app::application app; // f goes here
     app.run();
+
+    lib::data_carrier car(
+        lib::data_carrier_type::Book, "Me", "Myself & I", 2002, true);
+    lib::data_carrier car2(
+        lib::data_carrier_type::CD_ROM, "Marti", "KABOOM", 2012, false);
+
+    std::vector<std::string> out{car.toLine(), car2.toLine()};
+    std::vector<lib::data_carrier> in;
+
+    fio::writer w("duo");
+    fio::reader r("duo");
+    w.write(out);
+    for (auto l : r.read()) {
+        in.push_back(lib::data_carrier::fromLine(l));
+    }
+    for (auto car : in) {
+        printf("%s\n", car.toLine().data());
+    }
     return 0;
 }

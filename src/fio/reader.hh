@@ -1,7 +1,8 @@
 #pragma once
 
-#include <span>
+#include <fstream>
 #include <string>
+#include <vector>
 
 #include "handler.hh"
 
@@ -9,8 +10,11 @@ namespace fio {
 
 class reader : handler {
   private:
+    std::ifstream myfile;
+
   public:
-    std::span<std::string> read();
+    reader(std::string);
+    std::vector<std::string> read();
 };
 
 } // namespace fio
