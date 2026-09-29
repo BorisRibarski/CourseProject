@@ -6,6 +6,8 @@
 
 #include "data_carrier.hh"
 
+namespace lib {
+
 class library {
   public:
     using vector = std::vector<data_carrier>;
@@ -20,3 +22,5 @@ class library {
     span get_non_available();
     span_pair get_all();
 };
+
+} // namespace lib

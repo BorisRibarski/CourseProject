@@ -4,6 +4,8 @@
 
 #include "data_carrier_type.hh"
 
+namespace lib {
+
 class data_carrier {
   public:
   private:
@@ -13,3 +15,5 @@ class data_carrier {
     int release_year;
     bool is_available;
 };
+
+} // namespace lib

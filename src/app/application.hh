@@ -2,10 +2,14 @@
 
 #include "library.hh"
 
+namespace app {
+
 class application {
   private:
-    library lib;
+    lib::library lib;
 
   public:
     void run();
 };
+
+} // namespace app
