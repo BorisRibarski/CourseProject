@@ -1,5 +1,5 @@
 CXX := g++
-CPPFLAGS := -I. -Isrc -Isrc/app  -Isrc/cli  -Isrc/lib
+CPPFLAGS := -I. -Isrc -Isrc/app -Isrc/cli -Isrc/fio -Isrc/lib
 CXXFLAGS := -std=c++23 -Wall -Wextra -pedantic
 TARGET_DIR := target
 TARGET := $(TARGET_DIR)/program

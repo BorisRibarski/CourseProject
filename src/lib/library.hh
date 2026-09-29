@@ -18,6 +18,7 @@ class library {
     vector shelf;
 
   public:
+    void add(int, std::string_view, std::string_view, int);
     span get_available();
     span get_non_available();
     span_pair get_all();

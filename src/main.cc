@@ -8,9 +8,10 @@
 #include <vector>
 
 #include "application.hh"
-#include "fio/reader.hh"
-#include "fio/writer.hh"
-#include "lib/data_carrier.hh"
+#include "data_carrier.hh"
+#include "reader.hh"
+#include "screen.hh"
+#include "writer.hh"
 
 struct flags {
     bool is_verbose;
@@ -82,9 +83,17 @@ int main(int argc, char **argv) {
     } catch (std::exception &e) {
         printf("%s", e.what());
     }
+    using std::operator""s;
+    cli::screen screen = cli::screen_builder()
+                             .add_row_centered("Ribcho is cooking"s)
+                             .build();
+    screen.print();
     app::application app; // f goes here
     app.run();
 
+    return 0;
+}
+void fun() {
     lib::data_carrier car(
         lib::data_carrier_type::Book, "Me", "Myself & I", 2002, true);
     lib::data_carrier car2(
@@ -102,5 +111,4 @@ int main(int argc, char **argv) {
     for (auto car : in) {
         printf("%s\n", car.toLine().data());
     }
-    return 0;
 }
