@@ -1,18 +1,17 @@
 CXX := g++
 CPPFLAGS := -I.
-CXXFLAGS := -std=c++17 -Wall -Wextra -pedantic
+CXXFLAGS := -std=c++23 -Wall -Wextra -pedantic
 TARGET := program
 SRCS := $(wildcard *.cc)
-OBJS := $(SRCS:.cpp=.o)
+OBJS := $(SRCS:.cc=.o)
 
 .PHONY: all clean run
 
 all: $(TARGET)
-
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^
 
-%.o: %.cpp
+%.o: %.cc
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 run: $(TARGET)

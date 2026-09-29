@@ -1,1 +1,4 @@
 program
+notes.txt
+.clang-format
+*.o

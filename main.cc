@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include "application.hh"
 
 int main() {
-  printf("Hello World!\n");
-  return 0;
+    application app;
+    app.run();
+    return 0;
 }
