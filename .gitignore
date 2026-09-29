@@ -2,5 +2,6 @@
 program
 *.o
 build/*
+data/*
 notes/*
 target/*
