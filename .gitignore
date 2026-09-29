@@ -1,4 +1,6 @@
-program
-notes.txt
 .clang-format
+program
 *.o
+build/*
+notes/*
+target/*
