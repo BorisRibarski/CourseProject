@@ -25,6 +25,9 @@ void application::home_menu() {
             list_menu();
             break;
         case 3:
+            lib_menu();
+            break;
+        case 4:
             return;
         default:
             break;
@@ -45,6 +48,23 @@ void application::entity_menu() {
             remove();
             break;
         case 4:
+            return;
+        default:
+            break;
+        }
+    }
+}
+void application::lib_menu() {
+    while (true) {
+        terminal.show_lib_mgmt();
+        switch (terminal.get_answer()) {
+        case 1:
+            load();
+            return;
+        case 2:
+            save();
+            return;
+        case 3:
             return;
         default:
             break;
@@ -92,24 +112,41 @@ void application::remove() {
     int n = parse_int(n_str);
     lib.remove(n);
 }
+
+void application::load() {
+    auto res = reader.read();
+    lib.load(res);
+}
+void application::save() {
+    writer.write(lib.save());
+}
+
 void application::list_ava() {
     auto list = lib.get_available();
+    int i = 0;
+    do {
+        terminal.show_list(list);
 
-    terminal.show_list(list);
-
-    int i = terminal.get_answer();
+        i = terminal.get_answer();
+    } while (i != 1);
 }
 void application::list_non() {
     auto list = lib.get_non_available();
-    terminal.show_list(list);
+    int i = 0;
+    do {
+        terminal.show_list(list);
 
-    int i = terminal.get_answer();
+        i = terminal.get_answer();
+    } while (i != 1);
 }
 void application::list_all() {
     auto list = lib.get_all();
-    terminal.show_list(list);
+    int i = 0;
+    do {
+        terminal.show_list(list);
 
-    int i = terminal.get_answer();
+        i = terminal.get_answer();
+    } while (i != 1);
 }
 void application::exit_screen() {
     terminal.show_goodbye();
@@ -118,6 +155,10 @@ void application::run() {
     home_menu();
     // MAGIC
     exit_screen();
+}
+application::application(std::string import_filename,
+                         std::string export_filename)
+    : reader(import_filename), writer(export_filename) {
 }
 
 } // namespace app

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <fstream>
-#include <span>
+#include <vector>
 
 #include "handler.hh"
 
@@ -13,7 +13,7 @@ class writer : handler {
 
   public:
     writer(std::string);
-    void write(std::span<std::string>);
+    void write(std::vector<std::string>);
 };
 
 } // namespace fio

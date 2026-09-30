@@ -39,10 +39,17 @@ std::vector<std::string> library::get_all() {
                    [](lib::data_carrier d) { return d.toString(); });
     return items_str;
 }
-void library::load(span items) {
+void library::load(std::vector<std::string> items) {
     for (auto i : items) {
-        shelf.emplace_back(i);
+        shelf.emplace_back(data_carrier::fromLine(i));
     }
+}
+std::vector<std::string> library::save() {
+    std::vector<std::string> res;
+    for (auto i : shelf) {
+        res.emplace_back(i.toLine());
+    }
+    return res;
 }
 
 } // namespace lib

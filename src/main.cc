@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
     } catch (std::exception &e) {
         printf("%s", e.what());
     }
-    app::application app; // f goes here
+    app::application app("data/import", "data/export"); // f goes here
     app.run();
 
     return 0;

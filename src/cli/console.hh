@@ -13,6 +13,7 @@ class console {
     void show_home();
     void show_goodbye();
     void show_entity_mgmt();
+    void show_lib_mgmt();
     void show_list_menu();
     void show_list(std::span<std::string> items);
     std::string question(std::string_view);

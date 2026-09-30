@@ -23,7 +23,8 @@ class library {
     std::vector<std::string> get_available();
     std::vector<std::string> get_non_available();
     std::vector<std::string> get_all();
-    void load(span items);
+    void load(std::vector<std::string> items);
+    std::vector<std::string> save();
 };
 
 } // namespace lib

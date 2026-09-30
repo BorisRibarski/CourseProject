@@ -9,7 +9,8 @@ void console::show_home() {
     screen_builder()
         .add_tab_row("1. Entity Management")
         .add_tab_row("2. List view")
-        .add_tab_row("3. Exit")
+        .add_tab_row("3. Library Management")
+        .add_tab_row("4. Exit")
         .build()
         .print();
 }
@@ -19,6 +20,14 @@ void console::show_entity_mgmt() {
         .add_tab_row("2. Remove")
         .add_tab_row("3. Get/Return")
         .add_tab_row("4. Exit")
+        .build()
+        .print();
+}
+void console::show_lib_mgmt() {
+    screen_builder()
+        .add_tab_row("1. Load from file")
+        .add_tab_row("2. Save to file")
+        .add_tab_row("3. Exit")
         .build()
         .print();
 }
