@@ -1,0 +1,145 @@
+@startuml
+  
+title Virtual Library
+
+class application {
+    - lib: library
+    - terminal: console
+    - reader: reader
+    - writer: writer
+
+    - home_menu(): void
+    - entity_menu(): void
+    - lib_menu(): void
+    - list_menu(): void
+    - add_new(): void
+    - invert(): void
+    - remove(): void
+    - save(): void
+    - load(): void
+    - list_ava(): void
+    - list_non(): void
+    - list_all(): void
+    - exit_screen(): void
+    + run(): void
+}
+
+application *-- library : contains >
+application *-- console : contains >
+application *-- reader : contains >
+application *-- writer : contains >
+
+class console {
+  -  working: bool
+
+
+  +  show_home(): void
+  +  show_goodbye(): void
+  +  show_entity_mgmt(): void
+  +  show_lib_mgmt(): void
+  +  show_list_menu(): void
+  +  show_list(span<string> items): void
+  +  question(string_view): string
+  +  get_answer(): int
+  +  is_working(): bool
+  +  quit(): void
+}
+
+console <|.. screen_builder : use
+
+class screen {
+
+  - matrix: vector<string>
+
+  
+
+    friend class screen_builder;
+
+  
+  + print(): void
+}
+
+class screen_builder {
+  - scr: screen 
+  - width: static const int
+  - line: static const string
+  - empty: static const string
+  - tab: static const string
+
+  + screen_builder();
+  + screen_builder &&add_row(string_view);
+  + screen_builder &&add_tab_row(string_view);
+  + screen_builder &&add_row_centered(string_view);
+  + screen_builder &&add_line();
+  + screen_builder &&add_empty();
+  + screen_builder &&clear();
+  + screen build() &&;
+  + screen clean_build() &&;
+}
+
+
+screen_builder *-- screen : contains >
+
+class handler {
+    filename: string
+}
+
+class reader {
+  - myfile: ifstream
+
+  + read(): vector<string> 
+}
+
+reader <|-- handler : extends
+
+class writer {
+  - myfile: ofstream
+
+  + write(lines: vector<string>): void
+}
+
+writer <|-- handler : extends
+
+enum data_carrier_type {
+    Book,
+    Magazine,
+    AudioCd,
+    CD_ROM,
+    Audio_Cassette,
+    Video_Cassette,
+    Error
+}
+
+class data_carrier {
+  - type: data_carrier_type
+  - author: string
+  - title: string
+  - release_year: int
+  - available: bool
+
+   + invert(): void
+   + toString(): string
+   + toLine(): string
+   + static fromLine(string):data_carrier
+
+  - int_to_type(i: int):data_carrier_type
+}
+
+
+data_carrier *-- data_carrier_type : contains >
+
+class library {
+  - shelf: vector<data_carrier>
+
+  + add(type: int,author: string,title: string,year: int): void 
+  + remove(id: int): void 
+  + change(id: int): void 
+  + get_available(): vector<string>
+  + get_non_available(): vector<string>
+  + get_all(): vector<string>
+  + load(items: vector<string>): void
+  + save():vector<string>
+}
+
+
+library ..> data_carrier : contains vector >
