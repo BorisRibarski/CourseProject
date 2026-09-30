@@ -15,8 +15,15 @@ struct flags {
     int has_output_file;
 };
 
-flags handle_args(int argc, char **argv) {
-    flags ret = {};
+struct files {
+    std::optional<std::string> import_file;
+    std::optional<std::string> export_file;
+};
+
+files handle_args(int argc, char **argv) {
+    flags check = {};
+    files paths = {};
+
     using args_type = std::span<char *>;
     args_type args(argv, argc);
     auto arg = args.begin() + 1;
@@ -43,24 +50,28 @@ flags handle_args(int argc, char **argv) {
 
         if (*arg == "--verbose"sv || *arg == "-v"sv) {
             handle_mono("Verbose\n");
-            ret.is_verbose = true;
+            check.is_verbose = true;
         } else if (*arg == "--file"sv || *arg == "-f"sv) {
             handle_duo("Defined io file", i, args);
-            ret.has_input_file++;
-            ret.has_output_file++;
-            check_overload(ret);
+            check.has_input_file++;
+            check.has_output_file++;
+            check_overload(check);
+            paths.import_file = *(arg + 1);
+            paths.export_file = *(arg + 1);
             i++;
             arg++;
         } else if (*arg == "--input-file"sv || *arg == "-i"sv) {
             handle_duo("Defined input file", i, args);
-            ret.has_input_file++;
-            check_overload(ret);
+            check.has_input_file++;
+            check_overload(check);
+            paths.import_file = *(arg + 1);
             i++;
             arg++;
         } else if (*arg == "--output-file"sv || *arg == "-o"sv) {
             handle_duo("Defined output file", i, args);
-            ret.has_output_file++;
-            check_overload(ret);
+            check.has_output_file++;
+            check_overload(check);
+            paths.export_file = *(arg + 1);
             i++;
             arg++;
         } else if (*arg == "--help"sv || *arg == "-o"sv) {
@@ -69,17 +80,23 @@ flags handle_args(int argc, char **argv) {
             throw std::invalid_argument("Invalid argument");
         }
     }
-    return ret;
+    return paths;
 }
 
 int main(int argc, char **argv) {
-    flags f = {};
+    files f = {};
     try {
         f = handle_args(argc, argv);
     } catch (std::exception &e) {
         printf("%s", e.what());
     }
-    app::application app("data/import", "data/export"); // f goes here
+    if (not f.import_file.has_value()) {
+        f.import_file = "data/import";
+    }
+    if (not f.export_file.has_value()) {
+        f.export_file = "data/export";
+    }
+    app::application app(*f.import_file, *f.export_file); // f goes here
     app.run();
 
     return 0;
