@@ -1,4 +1,5 @@
 #pragma once
+
 namespace lib {
 
 enum class data_carrier_type {
@@ -7,7 +8,7 @@ enum class data_carrier_type {
     AudioCd = 2,
     CD_ROM = 3,
     Audio_Cassette = 4,
-    Video_Cassette = 5
+    Video_Cassette = 5,
+    Error
 };
-
 } // namespace lib

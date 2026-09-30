@@ -7,13 +7,31 @@
 
 namespace lib {
 
+void data_carrier::invert() {
+    available = !available;
+}
 data_carrier::data_carrier(data_carrier_type type_,
                            std::string author_,
                            std::string title_,
                            int release_year_,
-                           bool is_available_)
+                           bool available_)
     : type(type_), author(author_), title(title_),
-      release_year(release_year_), is_available(is_available_) {
+      release_year(release_year_), available(available_) {
+}
+data_carrier::data_carrier(int type_,
+                           std::string author_,
+                           std::string title_,
+                           int release_year_)
+    : type(int_to_type(type_)), author(author_), title(title_),
+      release_year(release_year_), available(true) {
+}
+std::string data_carrier::toString() {
+    return std::format("{} {} {} {} {}",
+                       std::to_underlying(type),
+                       author,
+                       title,
+                       release_year,
+                       available);
 }
 std::string data_carrier::toLine() {
     return std::format("[{};{};{};{};{}]",
@@ -21,7 +39,7 @@ std::string data_carrier::toLine() {
                        author,
                        title,
                        release_year,
-                       is_available);
+                       available);
 }
 
 data_carrier data_carrier::fromLine(std::string line) {
@@ -56,6 +74,25 @@ data_carrier data_carrier::fromLine(std::string line) {
                         std::move(title_str),
                         year,
                         available);
+}
+
+data_carrier_type data_carrier::int_to_type(int i) {
+    switch (i) {
+    case 0:
+        return data_carrier_type::Book;
+    case 1:
+        return data_carrier_type::Magazine;
+    case 2:
+        return data_carrier_type::AudioCd;
+    case 3:
+        return data_carrier_type::CD_ROM;
+    case 4:
+        return data_carrier_type::Audio_Cassette;
+    case 5:
+        return data_carrier_type::Video_Cassette;
+    default:
+        return data_carrier_type::Error;
+    }
 }
 
 } // namespace lib

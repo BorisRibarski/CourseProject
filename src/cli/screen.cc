@@ -18,7 +18,7 @@ screen::screen() {
 void screen::print() {
     clear_screen();
     for (auto &line : matrix) {
-        printf("%s\n", line.data());
+        printf("%s%s", line.data(), line == matrix.back() ? "" : "\n");
     }
 }
 

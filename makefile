@@ -1,6 +1,7 @@
 CXX := g++
 CPPFLAGS := -I. -Isrc -Isrc/app -Isrc/cli -Isrc/fio -Isrc/lib
 CXXFLAGS := -std=c++23 -Wall -Wextra -pedantic
+DATA_DIR := data
 TARGET_DIR := target
 TARGET := $(TARGET_DIR)/program
 BUILD_DIR = build
@@ -22,4 +23,4 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -fr $(BUILD_DIR) $(TARGET_DIR)
+	rm -fr $(BUILD_DIR) $(TARGET_DIR) $(DATA_DIR)

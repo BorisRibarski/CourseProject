@@ -12,16 +12,18 @@ class library {
   public:
     using vector = std::vector<data_carrier>;
     using span = std::span<data_carrier>;
-    using span_pair = std::span<data_carrier>;
 
   private:
     vector shelf;
 
   public:
-    void add(int, std::string_view, std::string_view, int);
-    span get_available();
-    span get_non_available();
-    span_pair get_all();
+    void add(int, std::string, std::string, int);
+    void remove(int);
+    void change(int);
+    std::vector<std::string> get_available();
+    std::vector<std::string> get_non_available();
+    std::vector<std::string> get_all();
+    void load(span items);
 };
 
 } // namespace lib

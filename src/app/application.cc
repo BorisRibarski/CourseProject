@@ -1,5 +1,6 @@
 #include "application.hh"
 
+#include <format>
 #include <stdexcept>
 #include <stdio.h>
 
@@ -21,7 +22,7 @@ void application::home_menu() {
             entity_menu();
             break;
         case 2:
-            // list_menu();
+            list_menu();
             break;
         case 3:
             return;
@@ -38,10 +39,30 @@ void application::entity_menu() {
             add_new();
             break;
         case 2:
-            // change();
+            invert();
             break;
         case 3:
-            // remove();
+            remove();
+            break;
+        case 4:
+            return;
+        default:
+            break;
+        }
+    }
+}
+void application::list_menu() {
+    while (true) {
+        terminal.show_list_menu();
+        switch (terminal.get_answer()) {
+        case 1:
+            list_ava();
+            break;
+        case 2:
+            list_non();
+            break;
+        case 3:
+            list_all();
             break;
         case 4:
             return;
@@ -58,6 +79,37 @@ void application::add_new() {
     std::string year_str = terminal.question("Release year");
     int year = parse_int(year_str);
     lib.add(type, author, title, year);
+    auto l = lib.get_all();
+    printf("Count:%ld", l.size());
+}
+void application::invert() {
+    std::string n_str = terminal.question("Number");
+    int n = parse_int(n_str);
+    lib.change(n);
+}
+void application::remove() {
+    std::string n_str = terminal.question("Number");
+    int n = parse_int(n_str);
+    lib.remove(n);
+}
+void application::list_ava() {
+    auto list = lib.get_available();
+
+    terminal.show_list(list);
+
+    int i = terminal.get_answer();
+}
+void application::list_non() {
+    auto list = lib.get_non_available();
+    terminal.show_list(list);
+
+    int i = terminal.get_answer();
+}
+void application::list_all() {
+    auto list = lib.get_all();
+    terminal.show_list(list);
+
+    int i = terminal.get_answer();
 }
 void application::exit_screen() {
     terminal.show_goodbye();

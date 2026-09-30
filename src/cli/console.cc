@@ -22,6 +22,35 @@ void console::show_entity_mgmt() {
         .build()
         .print();
 }
+void console::show_list_menu() {
+    screen_builder()
+        .add_tab_row("1. List Available")
+        .add_tab_row("2. List Non-Available")
+        .add_tab_row("3. List All")
+        .add_tab_row("4. Exit")
+        .build()
+        .print();
+}
+void console::show_list(std::span<std::string> items) {
+    screen_builder sb;
+    if (items.size() == 0) {
+        sb.add_tab_row("Empty");
+    } else {
+        int i = 1;
+        for (auto t : items) {
+            std::string item = std::format("{}. {}", i++, t);
+            sb.add_tab_row(item);
+        }
+    }
+    std::move(sb)
+        .add_empty()
+        .add_line()
+        .add_empty()
+        .add_empty()
+        .add_tab_row("1. Exit")
+        .build()
+        .print();
+}
 void console::show_goodbye() {
     screen_builder()
         .clear()
@@ -36,12 +65,18 @@ void console::show_goodbye() {
         .add_row("                                                                                ")
         .add_row("################################################################################")
         // clang-format on
+        .add_empty()
         .clean_build()
         .print();
 }
 std::string console::question(std::string_view view) {
     using std::operator""sv;
-    screen_builder().add_tab_row(view).build().print();
+    screen_builder()
+        .add_tab_row(view)
+        .add_empty()
+        .add_tab_row("Value:")
+        .clean_build()
+        .print();
     std::string line;
     std::cin >> line;
     return line;
